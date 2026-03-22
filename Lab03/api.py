@@ -50,7 +50,6 @@ def rsa_decrypt():
         return jsonify({'error': 'Invalid key type'})
 
     ciphertext = bytes.fromhex(ciphertext_hex)
-
     decrypted_message = rsa_cipher.decrypt(ciphertext, key)
 
     return jsonify({'decrypted_message': decrypted_message})
@@ -62,7 +61,6 @@ def rsa_sign_message():
     message = data['message']
 
     private_key, _ = rsa_cipher.load_keys()
-
     signature = rsa_cipher.sign(message, private_key)
     signature_hex = signature.hex()
 
@@ -75,14 +73,13 @@ def rsa_verify_signature():
     message = data['message']
     signature_hex = data['signature']
 
-    public_key, _ = rsa_cipher.load_keys()
-
+    _, public_key = rsa_cipher.load_keys()
     signature = bytes.fromhex(signature_hex)
-
     is_verified = rsa_cipher.verify(message, signature, public_key)
 
     return jsonify({'is_verified': is_verified})
 
 
+# Main function
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
