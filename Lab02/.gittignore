@@ -1,7 +1,3 @@
 #Compiled Python files
 *.pyc
 _pycache_/
-cipher/rsa/keys/
-*.pem
-cipher/rsa/keys/
-*.pem
